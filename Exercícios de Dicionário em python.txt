@@ -1,0 +1,116 @@
+Exercícios de Dicionário em python
+
+# Exercício 1
+# Crie uma lista de dicionários contendo as notas de todos os alunos de uma sala (5 alunos). No dicionário é para ter os campos:
+nome, nota1, nota2, media e status.
+# Peça para o usuário digitar as notas de cada aluno
+# Tire a média das notas e adicione no dicionário
+# Se média for maior ou igual a 7, coloque "aprovado" no status, caso contrário, coloque "reprovado"
+# Calcule a média das médias e imprima para o professor.
+
+# Crie uma lista de dicionários contendo as notas de todos os alunos de uma sala (5 alunos). No dicionário é para ter os campos:
+alunos = []
+
+# Peça para o usuário digitar as notas de cada aluno
+for i in range(5):
+  nome = str(input('Digite o nome do aluno: '))
+  nota1 = float(input('Digite a primeira nota: '))
+  nota2 = float(input('Digite a segunda nota: '))
+# Tire a média das notas e adicione no dicionário
+  media = nota1 + nota2 / 2
+# Se média for maior ou igual a 7, coloque "aprovado" no status, caso contrário, coloque "reprovado"
+  status = 'Aprovado' if media >= 7 else 'Reprovado'
+  
+# Criar o dicionário com as informações do aluno
+  aluno = {'nome': nome, 'nota1': nota1, 'nota2': nota2, 'media': media, 'status': status}
+# Adicionar o dicionário à lista de alunos
+  alunos.append(aluno)
+# Calcule a média das médias e imprima para o professor.
+mediageral = sum(aluno['media'] for aluno in alunos) / len(alunos)
+print(f'A média geral da sala é {mediageral:.2f}')
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+# Exercício 2
+# Adapte o sistema anterior para que as notas 1 e 2 estejam dentro de uma lista. Então o dicionário irá conter: nome, nota: [nota1 nota2], media e status
+
+# Crie uma lista de dicionários contendo as notas de todos os alunos de uma sala (5 alunos). No dicionário é para ter os campos:
+alunos = []
+
+# Peça para o usuário digitar as notas de cada aluno
+for i in range(5):
+  nome = str(input('Digite o nome do aluno: '))
+  nota1 = float(input('Digite a primeira nota: '))
+  nota2 = float(input('Digite a segunda nota: '))
+# Lista de Notas(reune as notas em uma lista, deixando o dicionário mais limpo):
+  notas = [nota1, nota2]
+# Tire a média das notas e adicione no dicionário
+  media = nota1 + nota2 / 2
+# Se média for maior ou igual a 7, coloque "aprovado" no status, caso contrário, coloque "reprovado"
+  status = 'Aprovado' if media >= 7 else 'Reprovado'
+# Criar o dicionário com as informações do aluno
+  aluno = {'nome': nome, 'nota1': nota1, 'nota2': nota2, 'media': media, 'status': status}
+# Adicionar o dicionário à lista de alunos
+  alunos.append(aluno)
+# Calcule a média das médias e imprima para o professor.
+mediageral = sum(aluno['media'] for aluno in alunos) / len(alunos)
+print(f'A média geral da sala é {mediageral:.2f}')
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Exercício 3
+Dada os dois dicionários abaixo, calcule a média de preços:
+produtos = [ {
+          'produto': 'maça',
+          'preco': 2.2
+          },
+         {
+          'produto': 'banana',
+          'preco': 1.2
+          } ]
+everton = {
+        'cliente': 'Everton'
+        'compra': [ {
+                      'produto': 'maça',
+                      'qtd' = 3
+                     },
+                    {
+                      'produto': 'banana',
+                      'qtd' = 10
+                     } ]
+}
+
+Calcule o valor total da compra do Everton
+Imprima a qtd que ele comprou e o que ele comprou
+Imprima o valor total das compras
+
+# definindo os dicionários
+produtos = [
+    {'produto': 'maça', 'preco': 2.2},
+    {'produto': 'banana', 'preco': 1.2}
+]
+
+everton = {
+    'cliente': 'Everton',
+    'compra': [
+        {'produto': 'maça', 'qtd': 3},
+        {'produto': 'banana', 'qtd': 10}
+    ]
+}
+# somando os preços
+total_precos = sum(produto['preco'] for produto in produtos)
+print(f'O preço total é R${total_precos:.2f}')
+# tirando a média dos preços
+media_precos = total_precos / len(produtos) # len informa o tamanho do objeto
+print(f'A média de preços é R${media_precos:.2f}')
+# Calcular o valor total da compra de Everton
+valor_total = 0
+for c in everton['compra']:
+# Encontrar o produto na lista de produtos
+  produto_everton = next((p for p in produtos if p['produto'] == c['produto']))
+# Calcular o valor da compra de cada produto
+valor_total += produto_everton['preco'] * c['qtd']
+# imprimindo o resultado
+print(f'O valor total de compra do Everton é: R${valor_total:.2f}')
+# Imprimir o que Everton comprou e a quantidade
+for c in everton['compra']:
+  print(f'Everton comprou {c["qtd"]} unidades de {c["produto"]}')
+# Passo 5: Imprimir o valor total das compras
+print(f'O valor total das compras de {everton["cliente"]} é: {valor_total:.2f}')
